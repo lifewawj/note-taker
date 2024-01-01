@@ -15,12 +15,12 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
-// Show an element
+// Show an element, by changing its CSS style to display: 'inline'
 const show = (elem) => {
   elem.style.display = 'inline';
 };
 
-// Hide an element
+// Hide an element, by changing it CSS style to display: 'none'
 const hide = (elem) => {
   elem.style.display = 'none';
 };
