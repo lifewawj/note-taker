@@ -1,3 +1,4 @@
+// Assigning let variables to later on call back to USE and Assign
 let noteForm;
 let noteTitle;
 let noteText;
@@ -5,6 +6,8 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
+
+// If the path is /notes then assign the variables to the HTML elements
 if (window.location.pathname === '/notes') {
   noteForm = document.querySelector('.note-form');
   noteTitle = document.querySelector('.note-title');
@@ -15,12 +18,12 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
-// Show an element, by changing its CSS style to display: 'inline'
+// SHOWS an element, by changing its CSS style to display: 'inline'
 const show = (elem) => {
   elem.style.display = 'inline';
 };
 
-// Hide an element, by changing it CSS style to display: 'none'
+// HIDES an element, by changing it CSS style to display: 'none'
 const hide = (elem) => {
   elem.style.display = 'none';
 };
@@ -28,6 +31,7 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+// a function that retrieves the notes from the db.json file
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -36,6 +40,8 @@ const getNotes = () =>
     }
   });
 
+
+// a function that SAVES the notes
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -45,6 +51,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note)
   });
 
+// a function that DELETES the notes
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -53,6 +60,8 @@ const deleteNote = (id) =>
     }
   });
 
+
+// a function that RENDER the active note
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   hide(clearBtn);
@@ -72,6 +81,7 @@ const renderActiveNote = () => {
   }
 };
 
+// a function that handles the note save
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
