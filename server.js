@@ -29,6 +29,21 @@ app.get('/', (req, res) => {
 
 // GET Route to retrieve the notes data in db.json file
 app.get('/api/notes', (req, res) => {
-  const noteData = require('./db/db.json');
-  res.json(noteData);
+  const noteData = './db/db.json'
+  fs.readFile(noteData, "utf8", (err, data) => {
+    if (err) {
+      return console.log(err);
+    } else {
+      res.json(JSON.parse(data));
+    }
+  });
 });
+
+// TODO: 
+// Create a app.post route for User to ADD new notes to the db.json file
+// app.post('/api/notes', (req, res) => {
+// })
+
+// Create a app.delete route for the User to DELETES notes from the db.json file
+// app.delete('/api/notes', (req, res) => {
+// })
