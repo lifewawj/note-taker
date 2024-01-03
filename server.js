@@ -48,10 +48,10 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   // Stores the user's inputed req into the title and text
   const { title, text } = req.body;
-  // Created a const variable for the location of the database file as a string
+  // Stores the directory location of note's data base json file into a const variable as a string
   const noteData = './db/db.json';
 
-  // Read the noteData to make sure we get the current one
+  // Read the noteData from db.json file to make sure we get the current one
   fs.readFile(noteData, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
@@ -80,7 +80,7 @@ app.post('/api/notes', (req, res) => {
         return res.status(500).send('Server Error');
       } else {
         // If it successfully writes return the updatedNotes
-        console.log('Notes successfully Added and Updated!')
+        console.log('Notes successfully Added!')
         return res.json(updatedNotes);
       }
     });
@@ -91,27 +91,33 @@ app.post('/api/notes', (req, res) => {
 
 // Create a app.delete route for the User to DELETES notes from the db.json file
 app.delete('/api/notes/:id', (req, res) => {
+  // Stores the id parameter from the request
   const deleteId = req.params.id;
+  // Stores the directory location of note's data base json file into a const variable as a string
   const noteData = './db/db.json';
 
+  // Read the noteData from db.json file to make sure we get the current one
   fs.readFile(noteData, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
       return res.status(500).send('Server Error');
     };
 
+    // Store the current noteData into a const var
     const currentNotes = JSON.parse(data);
 
+    // Filters the currentNotes
     const updatedNotes = currentNotes.filter((eachNote) => eachNote.id !== deleteId);
 
+    // With the updatedNotes we writeFile to the noteData file, JSON.stringifying the updatedNotes
     fs.writeFile(noteData, JSON.stringify(updatedNotes), "utf8", (err) => {
       if (err) {
         console.error(err);
         return res.status(500).send('Server Error');
+      } else {
+        console.log(`Note with id ${deleteId} successfully deleted`);
+        return res.json(updatedNotes);
       }
-
-      console.log(`Note with id ${deleteId} successfully deleted`);
-      return res.json(updatedNotes);
     });
   });
 });
