@@ -90,8 +90,31 @@ app.post('/api/notes', (req, res) => {
 
 
 // Create a app.delete route for the User to DELETES notes from the db.json file
-// app.delete('/api/notes', (req, res) => {
-// })
+app.delete('/api/notes/:id', (req, res) => {
+  const deleteId = req.params.id;
+  const noteData = './db/db.json';
+
+  fs.readFile(noteData, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Server Error');
+    };
+
+    const currentNotes = JSON.parse(data);
+
+    const updatedNotes = currentNotes.filter((eachNote) => eachNote.id !== deleteId);
+
+    fs.writeFile(noteData, JSON.stringify(updatedNotes), "utf8", (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Server Error');
+      }
+
+      console.log(`Note with id ${deleteId} successfully deleted`);
+      return res.json(updatedNotes);
+    });
+  });
+});
 
 // Sets up our server to listen for http requests
 app.listen(PORT, () =>
