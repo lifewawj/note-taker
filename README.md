@@ -56,7 +56,7 @@ npm run start
 
 6. To delete a note, click the trash icon next to the respective note
 
-Video Demonstration of how to use
+Video Demonstration of How to use the app:
 ![GIF of Note Taker](public/assets/note-taker-tutorial.gif)
 
 ## Features
