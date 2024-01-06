@@ -59,6 +59,11 @@ npm run start
 Video Demonstration of How to use the app:
 ![GIF of Note Taker](public/assets/note-taker-tutorial.gif)
 
+You can access the deployed version of the application by following this [link](https://ucsd-ajs-note-taker-6c105c85e30a.herokuapp.com/). Please note that the server may be down due to AJ's personal decision not to run the app anymore.
+
+**Disclaimer:** As of the last update to this README, the server hosting the application may be inactive, and the deployed app might not be accessible. If you encounter any issues or are unable to access the application, it could be due to the server being offline.
+
+
 ## Features
 
 - Create, save, and delete notes
